@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { DatePipe} from '@angular/common';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
     EmployeComponent,
     EmployeeListComponent
     
+    
   ],
   imports: [
     BrowserModule,
@@ -33,10 +35,12 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
     ReactiveFormsModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    FormsModule
     
     
   ],
-  providers: [EmployeeService,DepartmentService],
-  bootstrap: [AppComponent]
+  providers: [EmployeeService,DepartmentService,DatePipe],
+  bootstrap: [AppComponent],
+  entryComponents:[EmployeComponent]
 })
 export class AppModule { }

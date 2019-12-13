@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {FormGroup,FormControl,Validators} from '@angular/forms';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
-
+import { DatePipe } from '@angular/common';
 
 
 
@@ -10,16 +10,15 @@ import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 })
 export class EmployeeService {
 
-  constructor(private fireBase:AngularFireDatabase) { }
+  constructor(private fireBase:AngularFireDatabase, private datePipe: DatePipe) { }
 
   //Define For FireList
   employeeList:AngularFireList<any>;
-
   form:FormGroup=new FormGroup({
-    $key:new FormControl(null),
-    fullName:new FormControl('',Validators.required),
-    email:new FormControl('',Validators.email),
-    mobile:new FormControl('',[Validators.required,Validators.minLength(8)]),
+  $key:new FormControl(null),
+  fullName:new FormControl('',Validators.required),
+  email:new FormControl('',Validators.email),
+   mobile:new FormControl('',[Validators.required,Validators.minLength(8)]),
     city:new FormControl(''),
     gender:new FormControl('1'),
     department:new FormControl('0'),
@@ -35,7 +34,7 @@ export class EmployeeService {
       city:'',
       gender:'1',
       department:0,
-      hireDate:'',
+     hireDate:'',
       isParmanent:false,
     })
   }
@@ -53,7 +52,7 @@ export class EmployeeService {
       city:employe.city,
       gender:employe.gender,
       department:employe.department,
-      hireDate:employe.hireDate,
+      hireDate:this.datePipe.transform(employe.hireDate,'YYYY-MM-DD'),
       isParmanent:employe.isParmanent
     });
   }
@@ -65,7 +64,8 @@ export class EmployeeService {
       city:employe.city,
       gender:employe.gender,
       department:employe.department,
-      hireDate:employe.hireDate,
+      //hireDate:employe.hireDate,
+      hireDate:this.datePipe.transform(employe.hireDate,'YYYY-MM-DD'),
       isParmanent:employe.isParmanent
 
     });
@@ -74,5 +74,10 @@ export class EmployeeService {
     this.employeeList.remove($key);
     
   }
+  populateForm(employe){
+   this.form.setValue(employe);
+
+
+ }
   //All Methods update,remove Present In AngularFireList Class.
 }

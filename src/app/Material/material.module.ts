@@ -22,7 +22,8 @@ import * as Material from "@angular/material";
     Material.MatTableModule,
     Material.MatIconModule,
     Material.MatSortModule,
-    Material.MatPaginatorModule
+    Material.MatPaginatorModule,
+    Material.MatDialogModule
       ],
   exports :[
     Material.MatToolbarModule,
@@ -39,7 +40,8 @@ import * as Material from "@angular/material";
     Material.MatTableModule,
     Material.MatIconModule,
     Material.MatSortModule,
-    Material.MatPaginatorModule
+    Material.MatPaginatorModule,
+    Material.MatDialogModule
 
   ]
 })
